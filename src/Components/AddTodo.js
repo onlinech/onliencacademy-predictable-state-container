@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { TodoActions } from '../Actions/TodoActions';
 
 class AddTodo extends Component{
     constructor(props){
@@ -18,7 +17,7 @@ class AddTodo extends Component{
     }
 
     onAdd(){
-        TodoActions.addTodo(this.state.todo);
+        this.props.onAdd(this.state.todo);
         this.setState({
             todo: ''
         });

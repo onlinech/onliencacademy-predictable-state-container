@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import TodoList from './Components/TodoList';
-import AddTodo from './Components/AddTodo';
+import TodoListContainer from './Containers/TodoListContainer';
+import AddTodoContainer from './Containers/AddTodoContainer';
 import './App.css';
 
 class App extends Component {
   
   constructor(props){
     super(props);
-    this.store = this.props.store;
+    
     this.state = {
-        todos: this.props.store.getTodos()
+        todos: {}
     } 
-  }
-
-  componentDidMount(){
-    this.store.addChangeListener(this.onChange.bind(this));
-  }
-
-  componentWillUnmount(){
-    this.store.removeEventListener(this.onChange.bind(this));
-  }
-
-  onChange(){
-    this.setState({
-      todos: this.store.getTodos()
-    });
   }
 
   render() {
@@ -36,8 +22,8 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <div className="container">
-          <TodoList todos={this.state.todos} />
-          <AddTodo />
+          <TodoListContainer />
+          <AddTodoContainer />
         </div>
       </div>
     );

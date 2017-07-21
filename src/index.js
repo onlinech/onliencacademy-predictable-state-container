@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import TodoStore from './Store/TodoStore'
-import Dispatcher from './Dispatcher/Dispatcher'
-import { TodoActions, TodoActionConstants } from './Actions/TodoActions'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { todoReducer } from './Reducers/TodoReducer';
 
-var initialState = 
+
+const initialState = 
 {
     todos: [
         {
@@ -32,29 +33,7 @@ var initialState =
         }
     ]};
 
-var store = new TodoStore(initialState);
+let store = createStore(todoReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-store.on('FAKE_EVENT', function(){
-    console.log("Fake event raised");
-});
-
-store.emit('FAKE_EVENT');
-
-Dispatcher.register(function(action){
-    console.log('Action received: ' + action.type);
-});
-
-Dispatcher.register(function(action){
-    switch (action.type){
-        case TodoActionConstants.ADD_TODO:
-            store.addTodo(action.todoText);
-            break;
-        case TodoActionConstants.MARK_AS_COMPLETED:
-            store.markTodoAsCompleted(action.id);
-            break;
-    }
-})
-
-
-ReactDOM.render(<App store={store} />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();

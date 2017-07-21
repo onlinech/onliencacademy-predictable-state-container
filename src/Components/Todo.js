@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import { TodoActions } from '../Actions/TodoActions';
 
 class Todo extends Component{
 
     onMarkCompleted(){
-        TodoActions.markAsCompleted(this.props.todo.id);
+        this.props.onMarkCompleted(this.props.todo.id);
     }
 
     render(){
