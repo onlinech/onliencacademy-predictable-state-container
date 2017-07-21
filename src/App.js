@@ -6,38 +6,26 @@ import './App.css';
 
 class App extends Component {
   
- constructor(props){
-   super(props);
-   this.state = this.props;
- }
-  
-  onMarkCompleted(id){
-    var newState = Object.assign({}, this.state, {
-      todos: this.state.todos.map((todo) => {
-        if (todo.id === id) {
-          return Object.assign({}, todo, {
-            completed: true
-          })
-        }
-        return todo;
-      })
-    });
-
-    this.setState(newState);
+  constructor(props){
+    super(props);
+    this.store = this.props.store;
+    this.state = {
+        todos: this.props.store.getTodos()
+    } 
   }
 
-  onAdd(todo){
-    var newState = Object.assign({}, this.state, {
-      todos: [
-        ...this.state.todos,
-        {
-          id: this.state.todos.length + 1,
-          task: todo,
-          completed: false
-        }
-      ]
+  componentDidMount(){
+    this.store.addChangeListener(this.onChange.bind(this));
+  }
+
+  componentWillUnmount(){
+    this.store.removeEventListener(this.onChange.bind(this));
+  }
+
+  onChange(){
+    this.setState({
+      todos: this.store.getTodos()
     });
-    this.setState(newState);
   }
 
   render() {
@@ -48,8 +36,8 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <div className="container">
-          <TodoList todos={this.state.todos} onMarkCompleted={this.onMarkCompleted.bind(this)}/>
-          <AddTodo onAdd={this.onAdd.bind(this)}/>
+          <TodoList todos={this.state.todos} />
+          <AddTodo />
         </div>
       </div>
     );

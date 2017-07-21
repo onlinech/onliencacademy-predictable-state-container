@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { TodoActions } from '../Actions/TodoActions';
 
 class AddTodo extends Component{
     constructor(props){
@@ -17,13 +18,16 @@ class AddTodo extends Component{
     }
 
     onAdd(){
-        this.props.onAdd(this.state.todo);
+        TodoActions.addTodo(this.state.todo);
+        this.setState({
+            todo: ''
+        });
     }
     
     render(){
         return (
             <div>
-                <input id="addTodo" onChange={this.onChange.bind(this)}></input>
+                <input id="addTodo" onChange={this.onChange.bind(this)} value={this.state.todo}></input>
                 &nbsp;<input type="button" className="btn btn-primary" value="Add" onClick={this.onAdd.bind(this)} />
             </div>
         );
