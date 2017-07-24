@@ -52,6 +52,12 @@ Dispatcher.register(function(action){
         case TodoActionConstants.MARK_AS_COMPLETED:
             store.markTodoAsCompleted(action.id);
             break;
+        case TodoActionConstants.STATE_FORWARD:
+            store.stateForward();
+            break;
+        case TodoActionConstants.STATE_BACKWARD:
+            store.stateBackward();
+            break;
     }
 })
 

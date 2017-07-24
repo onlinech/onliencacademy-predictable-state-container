@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import TodoList from './Components/TodoList';
 import AddTodo from './Components/AddTodo';
+import StateHistory from './Components/StateHistory';
 import './App.css';
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
         <div className="container">
           <TodoList todos={this.state.todos} />
           <AddTodo />
+          <StateHistory/>
         </div>
       </div>
     );

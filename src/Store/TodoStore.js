@@ -4,6 +4,7 @@ class TodoStore extends Store{
     constructor(initialState){
         super();
         this.state = initialState;
+        this.addToHistory(initialState);
     }
 
     emitChange(){
@@ -31,6 +32,7 @@ class TodoStore extends Store{
         });
         
         this.state = newState;
+        this.addToHistory(newState);
         this.emitChange();
     }
 
@@ -48,6 +50,7 @@ class TodoStore extends Store{
         });
 
         this.state = newState;
+        this.addToHistory(newState);
         this.emitChange();
     }
 }

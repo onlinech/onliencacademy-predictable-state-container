@@ -2,7 +2,9 @@ import Dispatcher from '../Dispatcher/Dispatcher';
 
 export const TodoActionConstants = {
     ADD_TODO: 'ADD_TODO',
-    MARK_AS_COMPLETED: 'MARK_AS_COMPLETED'
+    MARK_AS_COMPLETED: 'MARK_AS_COMPLETED',
+    STATE_FORWARD: 'STATE_FORWARD',
+    STATE_BACKWARD: 'STATE_BACKWARD'
 }
 
 export const TodoActions = {
@@ -17,6 +19,17 @@ export const TodoActions = {
             type: TodoActionConstants.MARK_AS_COMPLETED,
             id: id
         });
+    },
+    stateForward: () => {
+        Dispatcher.dispatch({
+            type: TodoActionConstants.STATE_FORWARD
+        });
+    },
+    stateBackward: () => {
+        Dispatcher.dispatch({
+            type: TodoActionConstants.STATE_BACKWARD
+        });
     }
+
 }
 
