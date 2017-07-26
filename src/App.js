@@ -37,9 +37,9 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <div className="container">
+          <StateHistory/>
           <TodoList todos={this.state.todos} />
           <AddTodo />
-          <StateHistory/>
         </div>
       </div>
     );
