@@ -44,17 +44,5 @@ Dispatcher.register(function(action){
     console.log('Action received: ' + action.type);
 });
 
-Dispatcher.register(function(action){
-    switch (action.type){
-        case TodoActionConstants.ADD_TODO:
-            store.addTodo(action.todoText);
-            break;
-        case TodoActionConstants.MARK_AS_COMPLETED:
-            store.markTodoAsCompleted(action.id);
-            break;
-    }
-})
-
-
 ReactDOM.render(<App store={store} />, document.getElementById('root'));
 registerServiceWorker();
